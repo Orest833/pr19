@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивна сторінка</title>
+    <style>
+        #hoverBox {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 10px 0;
+        }
+        #animatedBox {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="changeColor">Змінити колір фону</button>
+
+    <input type="text" id="inputText" placeholder="Введіть текст">
+    <p id="outputText"></p>
+
+    <div id="hoverBox"></div>
+
+    <div id="animatedBox"></div>
+    <button id="startAnimation">Запустити анімацію</button>
+
+    <script>
+        document.getElementById("changeColor").addEventListener("click", function() {
+            document.body.style.backgroundColor = "lightblue";
+        });
+
+        document.getElementById("inputText").addEventListener("input", function() {
+            document.getElementById("outputText").innerHTML = "Ви ввели: " + this.value;
+        });
+
+        document.getElementById("hoverBox").addEventListener("mouseover", function() {
+            this.style.backgroundColor = "yellow";
+        });
+        document.getElementById("hoverBox").addEventListener("mouseout", function() {
+            this.style.backgroundColor = "red";
+        });
+
+        document.getElementById("startAnimation").addEventListener("click", function() {
+            let box = document.getElementById("animatedBox");
+            let position = 0;
+            function move() {
+                position += 5;
+                box.style.left = position + "px";
+                if (position < 300) {
+                    requestAnimationFrame(move);
+                }
+            }
+            move();
+        });
+    </script>
+
+</body>
+</html>
